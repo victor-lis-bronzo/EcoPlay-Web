@@ -8,10 +8,10 @@ export default function Login() {
 	const session = useSession();
 	const router = useRouter();
 	useEffect(() => {
-		if (session && session.data?.token) {
+		if (session.data?.token) {
 			router.push("/");
 		}
-	}, []);
+	}, [router, session.data?.token]);
 	return (
 		<section className="flex justify-center items-center w-full h-screen">
 			<LoginForm />

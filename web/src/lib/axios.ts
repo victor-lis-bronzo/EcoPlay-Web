@@ -39,7 +39,13 @@ api.interceptors.request.use(
 	async (config) => {
 		const currentSession = await fetchSession(); // Busca a sessão, do cache ou nova
 
-		const token = currentSession?.token.user.token.toString();
+		const token =
+			typeof currentSession?.token === "object" &&
+			currentSession?.token !== null
+				? (
+						currentSession.token as { user?: { token?: string } }
+					)?.user?.token?.toString()
+				: undefined;
 		if (token && config.headers) {
 			config.headers.Authorization = `Bearer ${token}`;
 		}

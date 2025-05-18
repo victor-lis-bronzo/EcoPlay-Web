@@ -1,0 +1,12 @@
+model Institutions {
+  institutionId Int      @id @default(autoincrement())
+  name          String   @unique
+  status        Boolean
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  controllers   Controller[]
+  operators     Operator[]
+  
+  @@map("institutions")
+}

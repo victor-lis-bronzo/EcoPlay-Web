@@ -1,0 +1,73 @@
+{
+	"name": "api",
+	"version": "1.0.0",
+	"description": "",
+	"main": "dist/app.mjs",
+	"scripts": {
+		"dev": "tsx watch src/app.ts",
+		"build": "tsup src --format esm",
+		"start": "dotenv -e .env -v NODE_ENV=production node dist/app.mjs",
+		"swagger": "tsx src/swagger.ts",
+		"studio": "npx prisma studio",
+		"generate": "npx prisma generate",
+		"migrate": "npx prisma migrate dev"
+	},
+	"keywords": [
+		"Sustentabilidade",
+		"Reciclagem",
+		"Gamificação"
+	],
+	"author": "Victor Lis Bronzo",
+	"license": "ISC",
+	"prisma": {
+		"schema": "./prisma/schema"
+	},
+	"dependencies": {
+		"@fastify/cors": "^11.0.1",
+		"@prisma/client": "^6.5.0",
+		"axios": "^1.8.4",
+		"bcrypt": "^5.1.1",
+		"cors": "^2.8.5",
+		"date-fns": "^3.6.0",
+		"dotenv": "^16.4.7",
+		"express": "^5.1.0",
+		"express-rate-limit": "^7.5.0",
+		"fastify-type-provider-zod": "^4.0.2",
+		"helmet": "^7.2.0",
+		"jsonwebtoken": "^9.0.2",
+		"mqtt": "^5.10.4",
+		"resend": "^4.4.0",
+		"socket.io": "^4.8.1",
+		"swagger-ui-express": "^5.0.1",
+		"zod": "^3.24.2",
+		"zod-prisma-types": "^3.2.4"
+	},
+	"devDependencies": {
+		"@mermaid-js/mermaid-cli": "^11.4.2",
+		"@types/bcrypt": "^5.0.2",
+		"@types/cors": "^2.8.17",
+		"@types/express": "^4.17.21",
+		"@types/jsonwebtoken": "^9.0.9",
+		"@types/swagger-ui-express": "^4.1.8",
+		"dotenv-cli": "^8.0.0",
+		"prisma": "^6.8.2",
+		"prisma-erd-generator": "^2.0.4",
+		"swagger-autogen": "^2.23.7",
+		"ts-node": "^10.9.2",
+		"tsup": "^8.4.0",
+		"tsx": "^4.19.3",
+		"typescript": "^5.8.2"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"@prisma/client",
+			"@prisma/engines",
+			"@scarf/scarf",
+			"bcrypt",
+			"esbuild",
+			"prisma",
+			"puppeteer",
+			"vue-demi"
+		]
+	}
+}

@@ -1,0 +1,25 @@
+generator client {
+  provider        = "prisma-client-js"
+  output = "../generated/client"
+}
+
+generator zod {
+  provider         = "zod-prisma-types"
+  output           = "../generated/zod"
+  useMultipleFlies = true
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+// generator erd {
+//   provider = "prisma-erd-generator"
+//   output   = "../erd/diagram.svg"
+// }
+
+enum UserType {
+  USER
+  ADMIN
+}

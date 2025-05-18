@@ -1,0 +1,12 @@
+model Controller {
+  controllerId Int      @id @default(autoincrement())
+  name               String
+  code               String
+  status             Boolean
+  createdAt          DateTime @default(now())
+  institutionId            Int
+
+  institutions  Institutions    @relation(fields: [institutionId], references: [institutionId])
+
+  @@map("controller")
+}

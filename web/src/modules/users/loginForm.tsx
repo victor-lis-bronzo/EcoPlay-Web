@@ -96,7 +96,7 @@ export function LoginForm() {
 						name="password"
 						label="Senha"
 						placeholder="Digite sua senha"
-						className="w-full text-background"
+						className="w-full text-background bg-foreground"
 						inputClassname="bg-gray-150"
 					/>
 				</div>

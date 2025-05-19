@@ -68,7 +68,7 @@ export default function InputPassword({
 							<Button
 								type="button"
 								variant={"outline"}
-								className="p-0 h-full aspect-square bg-background text-foreground hover:bg-muted hover:text-foreground cursor-pointer"
+								className="p-0 h-full aspect-square text-foreground hover:bg-muted hover:text-foreground cursor-pointer"
 								onClick={togglePasswordVisibility}
 							>
 								{showPassword ? <EyeClosed size={18} /> : <Eye size={18} />}

@@ -1,10 +1,9 @@
-"use client";
-
 import NextAuthSessionProvider from "@/providers/nextAuthSessionProvider";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import NavigationMenu from "@/components/global/menu";
+import TanstackQueryClientWrapper from "@/providers/tanstackQueryClientProvider";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -16,11 +15,11 @@ const geistMono = Geist_Mono({
 	subsets: ["latin"],
 });
 
-// export const metadata: Metadata = {
-// 	title: "Eco-Play: Incentivo à Sustentabilidade",
-// 	description:
-// 		"Um incentivo à sustentabilidade e reciclagem através da gamificação",
-// };
+export const metadata: Metadata = {
+	title: "Eco-Play: Incentivo à Sustentabilidade",
+	description:
+		"Um incentivo à sustentabilidade e reciclagem através da gamificação",
+};
 
 export default function RootLayout({
 	children,
@@ -28,14 +27,15 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="pt-BR">
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
 				<NextAuthSessionProvider>
-					<QueryClientProvider client={new QueryClient()}>
+					<TanstackQueryClientWrapper>
+						<NavigationMenu />
 						{children}
-					</QueryClientProvider>
+					</TanstackQueryClientWrapper>
 				</NextAuthSessionProvider>
 			</body>
 		</html>

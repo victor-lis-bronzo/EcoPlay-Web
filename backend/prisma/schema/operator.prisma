@@ -1,16 +1,15 @@
 model Operator {
-  operatorId     Int      @id @default(autoincrement())
-  username       String   @unique
-  name           String
-  password       String
-  type           UserType @default(USER)
-  status         Boolean  @default(true)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  sessionVersion DateTime @default(now()) @updatedAt
+  operatorId Int      @id @default(autoincrement()) @map("operator_id")
+  username   String   @unique
+  name       String
+  password   String
+  type       UserType @default(USER)
+  status     Boolean  @default(true)
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
 
-  institutionId  Int?
-  institution    Institutions? @relation(fields: [institutionId], references: [institutionId])
+  institutionId Int?          @map("institution_id")
+  Institution   Institutions? @relation(fields: [institutionId], references: [institutionId])
 
   @@map("operator")
 }

@@ -2,6 +2,8 @@ model BottleCap {
   bottleCapId Int      @id @default(autoincrement()) @map("bottle_cap_id")
   createdAt   DateTime @default(now()) @map("created_at")
 
-  controllerId           Int         @map("controller_id")
-  Controller             Controller  @relation(fields: [controllerId], references: [controllerId])
+  controllerId Int        @map("controller_id")
+  Controller   Controller @relation(fields: [controllerId], references: [controllerId])
+
+  @@map("bottle_cap")
 }

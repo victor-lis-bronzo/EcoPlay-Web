@@ -1,4 +1,4 @@
-interface Operator {
+export interface Operator {
   operatorId: number;
   username: string;
   name: string;
@@ -12,7 +12,7 @@ interface Operator {
   // institution?: Institutions;
 }
 
-interface OperatorCreateInput {
+export interface OperatorCreateInput {
   username: string; 
   name: string;
   password: string;

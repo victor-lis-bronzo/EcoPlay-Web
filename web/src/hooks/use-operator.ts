@@ -2,40 +2,26 @@ import api from "@/lib/axios";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 
+import type { Operator, OperatorCreateInput } from "@/interfaces/operator";
+
 export function useGetOperators() {
-  const { data: dataSession, status } = useSession();
-  const token = dataSession?.token?.user?.token;
-
-  const isAuthenticated = status === "authenticated" && !!token;
-
-  const query = useQuery({
+  return useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const response = await api.get("/users");
+      const response = await api.get<Operator[]>("/users");
       return response.data;
     },
-    enabled: isAuthenticated,
   });
-
-  return { ...query, data: query.data };
 }
 
 export function useGetOperatorById(id: number) {
-  const { data: dataSession, status } = useSession();
-  const token = dataSession?.token?.user?.token;
-
-  const isAuthenticated = status === "authenticated" && !!token;
-
-  const query = useQuery({
-    queryKey: ["users", id],
+  return useQuery({
+    queryKey: ["users"],
     queryFn: async () => {
-      const response = await api.get(`/users/${id}`);
+      const response = await api.get<Operator[]>(`/users/${id}`);
       return response.data;
     },
-    enabled: isAuthenticated,
   });
-
-  return { ...query, data: query.data };
 }
 
 export function useCreateOperator() {
@@ -64,16 +50,9 @@ export function useCreateOperator() {
 
 export function useUpdateOperator() {
   const queryClient = useQueryClient();
-  const { data: dataSession, status } = useSession();
-  const token = dataSession?.token?.user?.token;
-
-  const mutation = useMutation({
+  return useMutation({
     mutationFn: async (data: Operator) => {
-      const response = await api.put(`/users/${data.operatorId}`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await api.put(`/users/${data.operatorId}`, data);
       return response.data;
     },
     onSuccess: (_data, variables) => {
@@ -85,22 +64,13 @@ export function useUpdateOperator() {
       });
     },
   });
-
-  return mutation;
 }
 
 export function useDeleteOperator() {
   const queryClient = useQueryClient();
-  const { data: dataSession, status } = useSession();
-  const token = dataSession?.token?.user?.token;
-
-  const mutation = useMutation({
+  return useMutation({
     mutationFn: async (id: number) => {
-      const response = await api.delete(`/users/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await api.delete(`/users/${id}`);
       return response.data;
     },
     onSuccess: () => {
@@ -109,6 +79,4 @@ export function useDeleteOperator() {
       });
     },
   });
-
-  return mutation;
 }

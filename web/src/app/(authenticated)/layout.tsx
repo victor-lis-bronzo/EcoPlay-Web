@@ -18,7 +18,7 @@ export default async function Layout({
 		redirect("/login");
 	}
 	return (
-		<main className="flex flex-col gap-6 px-8 pb-28 max-w-screen-sm mx-auto">
+		<main className="flex flex-col gap-6 px-8 pb-28 max-w-4xl mx-auto">
 			<header className="flex flex-col justify-center items-center pt-6">
 				<IconText className="text-foreground" />
 			</header>

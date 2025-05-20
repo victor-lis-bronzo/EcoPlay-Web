@@ -4,21 +4,21 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const team = [
-	{
-		name: "Karlos Eduardo Araújo de Moraes",
-		role: "Aluno",
-		img: "https://media.licdn.com/dms/image/v2/D4D03AQFTwtX-VNmHeQ/profile-displayphoto-shrink_100_100/B4DZVIgLWnG4Ag-/0/1740678150632?e=1752710400&v=beta&t=kwUT5kLuR0eiVGH0VX_OvCaKBWYloYCe30PzkHMW6fk",
-	},
+	// {
+	// 	name: "Karlos Eduardo Araújo de Moraes",
+	// 	role: "Aluno",
+	// 	img: "https://media.licdn.com/dms/image/v2/D4D03AQFTwtX-VNmHeQ/profile-displayphoto-shrink_100_100/B4DZVIgLWnG4Ag-/0/1740678150632?e=1752710400&v=beta&t=kwUT5kLuR0eiVGH0VX_OvCaKBWYloYCe30PzkHMW6fk",
+	// },
 	{
 		name: "Miguel Elias Rosillo Dimas",
 		role: "Aluno",
-		img: "https://media.licdn.com/dms/image/v2/D4D35AQH1AhSirlIcuA/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1735473272095?e=1747681200&v=beta&t=DkjzqmcL1Z98H9nxhUopkNgfEiH6Kzu6V0CFBf8F1r0",
+		img: "https://media.licdn.com/dms/image/v2/D4D35AQH1AhSirlIcuA/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1735473272095?e=1748307600&v=beta&t=meE-by-9HuXHdtNktSb8rPYChtVXlJx_Gio02GR7qQ0",
 	},
-	{
-		name: "Pedro Henrique Moraes Samsonas",
-		role: "Aluno",
-		img: "https://media.licdn.com/dms/image/v2/D4E03AQFMzqNX8xKYuQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1700528168812?e=1752710400&v=beta&t=k9w0Qprfhp32m9ln_1uzZa0yLIVnTj7w1ZYImVfgP5s",
-	},
+	// {
+	// 	name: "Pedro Henrique Moraes Samsonas",
+	// 	role: "Aluno",
+	// 	img: "https://media.licdn.com/dms/image/v2/D4E03AQFMzqNX8xKYuQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1700528168812?e=1752710400&v=beta&t=k9w0Qprfhp32m9ln_1uzZa0yLIVnTj7w1ZYImVfgP5s",
+	// },
 	{
 		name: "Victor Lis Bronzo",
 		role: "Aluno",
@@ -49,7 +49,7 @@ export default function Team() {
 				Nosso Time
 			</motion.h2>
 
-			<div className="grid grid-cols-1 min-[540px]:grid-cols-2 lg:grid-cols-3 gap-10 max-w-4xl mx-auto justify-items-center">
+			<div className="grid grid-cols-1 min-[540px]:grid-cols-2 lg:grid-cols-3 gap-10 max-w-4xl mx-auto justify-items-center items-center">
 				{team.map((member, index) => (
 					<motion.div
 						key={member.name}

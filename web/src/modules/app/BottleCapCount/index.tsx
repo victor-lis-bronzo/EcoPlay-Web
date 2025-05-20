@@ -29,7 +29,7 @@ export default function BottleCapCounter() {
 	}, [isInView, controls]);
 
 	return (
-		<section className="bg-foreground py-20 px-32 rounded text-center text-background">
+		<section className="bg-foreground py-20 px-6 md:px-32 rounded text-center text-background">
 			<motion.div
 				ref={ref}
 				initial="hidden"

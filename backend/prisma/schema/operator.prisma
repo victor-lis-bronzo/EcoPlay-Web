@@ -4,7 +4,7 @@ model Operator {
   name           String
   password       String
   type           UserType @default(USER)
-  status         Boolean
+  status         Boolean  @default(true)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   sessionVersion DateTime @default(now()) @updatedAt

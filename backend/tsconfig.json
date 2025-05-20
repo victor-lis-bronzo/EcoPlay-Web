@@ -9,9 +9,11 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "strictNullChecks": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@prisma/*": ["./prisma/*"]
+    }
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"]
 }

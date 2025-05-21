@@ -18,7 +18,7 @@ interface InputDefaultProps {
 	type?: string;
 	description?: string;
 	className?: string;
-	inputClassname?: string;
+	inputClassName?: string;
 	readOnly?: boolean;
 	disabled?: boolean;
 	maxLength?: number | undefined;
@@ -34,7 +34,7 @@ export default function InputDefault({
 	type = "text",
 	description,
 	className,
-	inputClassname,
+	inputClassName: inputClassname,
 	readOnly = false,
 	disabled = false,
 	maxLength = undefined,

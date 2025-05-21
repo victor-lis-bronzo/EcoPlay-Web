@@ -20,7 +20,11 @@ import { verifyToken } from "./middlewares/verify-token";
 const app = fastify();
 
 app.register(cors, {
-  origin: "*",
+  origin: (origin, cb) => {
+    cb(null, true); // Allow all origins
+  },
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  credentials: true, // Allow credentials if needed
 });
 
 app.setValidatorCompiler(validatorCompiler);

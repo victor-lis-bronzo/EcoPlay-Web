@@ -21,7 +21,7 @@ interface InputDefaultProps {
 	placeholder: string;
 	description?: string;
 	className?: string;
-	inputClassname?: string;
+	inputClassName?: string;
 	readOnly?: boolean;
 	disabled?: boolean;
 	maxLength?: number | undefined;
@@ -36,7 +36,7 @@ export default function InputPassword({
 	placeholder,
 	description,
 	className,
-	inputClassname,
+	inputClassName,
 	readOnly = false,
 	disabled = false,
 	maxLength = undefined,
@@ -58,7 +58,7 @@ export default function InputPassword({
 						<div className="flex gap-x-2">
 							<Input
 								type={showPassword ? "text" : "password"}
-								className={cn(className)}
+								className={cn(inputClassName)}
 								onChange={(event) => {
 									field.onChange(event);
 									onChange && onChange(event);

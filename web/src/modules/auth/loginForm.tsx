@@ -89,7 +89,7 @@ export function LoginForm() {
 						type="text"
 						placeholder="Seu e-mail ou nome de usuário"
 						className="w-full text-background"
-						inputClassname="bg-gray-150"
+						inputClassName="bg-gray-150"
 					/>
 					<InputPassword
 						control={form.control}
@@ -97,7 +97,7 @@ export function LoginForm() {
 						label="Senha"
 						placeholder="Digite sua senha"
 						className="w-full text-background bg-foreground"
-						inputClassname="bg-gray-150"
+						inputClassName="bg-gray-150"
 					/>
 				</div>
 

@@ -20,7 +20,7 @@ export default function OperatorsTable() {
 
 	return (
 		<>
-			<TableHeaderComponent title="Lista de Operadores" link="/operators/add" />
+			<TableHeaderComponent title="Lista de Operadores" link="/operators/new" />
 			<Table className="w-full min-w-md rounded-xl shadow-lg overflow-hidden bg-foreground">
 				<TableHeader className="border-b-2 border-background">
 					<TableRow>
@@ -83,7 +83,7 @@ export default function OperatorsTable() {
 								<button
 									type="submit"
 									onClick={() => alert("Item deletado!")}
-									className="text-red-500 hover:text-red-700"
+									className="text-red-500 hover:text-red-700 cursor-pointer"
 								>
 									<Trash2 className="w-5 h-5" />
 								</button>

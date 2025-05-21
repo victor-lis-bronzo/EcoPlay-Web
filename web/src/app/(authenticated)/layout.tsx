@@ -13,10 +13,10 @@ export default async function Layout({
 }: {
 	children: React.ReactNode;
 }) {
-	// const session = await getServerSession(nextAuthOptions);
-	// if (!session) {
-	// 	redirect("/login");
-	// }
+	const session = await getServerSession(nextAuthOptions);
+	if (!session) {
+		redirect("/login");
+	}
 	return (
 		<main className="flex flex-col gap-6 px-8 pb-28 max-w-4xl mx-auto">
 			<header className="flex flex-col justify-center items-center pt-6">

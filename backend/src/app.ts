@@ -29,10 +29,9 @@ import fastifySwaggerUi from "@fastify/swagger-ui";
 const app = fastify();
 
 app.register(cors, {
-  origin: ["http://localhost:3000", "https://eco-play.vercel.app/"],
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  credentials: true, // Allow credentials if needed
+  origin: true,
 });
+
 
 const theme = new SwaggerTheme();
 const content = theme.getBuffer(SwaggerThemeNameEnum.DARK); // Dark mode for Swagger UI

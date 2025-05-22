@@ -8,8 +8,8 @@ model Operator {
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @updatedAt @map("updated_at")
 
-  institutionId Int?          @map("institution_id")
-  Institution   Institutions? @relation(fields: [institutionId], references: [institutionId])
+  institutionId Int?         @map("institution_id")
+  Institution   Institution? @relation(fields: [institutionId], references: [institutionId])
 
   @@map("operator")
 }

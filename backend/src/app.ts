@@ -3,39 +3,72 @@ dotenv.config();
 
 import fastify from "fastify";
 import cors from "@fastify/cors";
+import fastifySwagger from "@fastify/swagger";
+import { SwaggerTheme, SwaggerThemeNameEnum } from "swagger-themes";
 import {
+  jsonSchemaTransform,
   serializerCompiler,
   validatorCompiler,
 } from "fastify-type-provider-zod";
 
+import { errorHandler } from "@/middlewares/error-handler";
+
 import "./mqtt/client"; // Mantém o MQTT ativo
 
-import { login } from "./routes/users/login";
-import { createUser } from "./routes/users/createUser";
+import { login } from "@/routes/auth/login";
+import { createUser } from "@/routes/auth/createUser";
 
-import { OperatorRouter } from "./routes/users/operators";
+import { OperatorRoutes } from "@/routes/users/index";
+import { InstitutionRoutes } from "@/routes/institutions";
+import { ControllerRoutes } from "./routes/controllers";
+import { BottleCapRoutes } from "./routes/bottles-cap";
 
-import { verifyToken } from "./middlewares/verify-token";
+import { verifyToken } from "@/middlewares/verify-token";
+import fastifySwaggerUi from "@fastify/swagger-ui";
 
 const app = fastify();
 
 app.register(cors, {
-  origin: (origin, cb) => {
-    cb(null, true); // Allow all origins
-  },
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   credentials: true, // Allow credentials if needed
 });
 
+const theme = new SwaggerTheme();
+const content = theme.getBuffer(SwaggerThemeNameEnum.DARK); // Dark mode for Swagger UI
+
+app.register(fastifySwagger, {
+  swagger: {
+    consumes: ["application/json"],
+    produces: ["application/json"],
+    info: {
+      title: "Eco-Play API",
+      description: "API para a aplicação do Eco-Play",
+      version: "1.0.0",
+    },
+  },
+  transform: jsonSchemaTransform,
+});
+
+app.register(fastifySwaggerUi, {
+  routePrefix: "/docs",
+  theme: {
+    css: [{ filename: "theme.css", content: content }],
+  },
+});
+
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
+app.setErrorHandler(errorHandler);
 
 app.register(login);
 app.register(createUser);
 
 app.register(async (app) => {
   app.addHook("preHandler", verifyToken);
-  app.register(OperatorRouter);
+  app.register(OperatorRoutes, { prefix: "/users" });
+  app.register(InstitutionRoutes, { prefix: "/institutions" });
+  app.register(ControllerRoutes, { prefix: "/controllers" });
+  app.register(BottleCapRoutes, { prefix: "/bottle-caps" });
 });
 
 // Inicializa o servidor

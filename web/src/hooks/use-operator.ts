@@ -1,6 +1,5 @@
 import api from "@/lib/axios";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
 
 import type { Operator, OperatorCreateInput } from "@/interfaces/operator";
 
@@ -16,9 +15,9 @@ export function useGetOperators() {
 
 export function useGetOperatorById(id: number) {
   return useQuery({
-    queryKey: ["users"],
+    queryKey: ["user"],
     queryFn: async () => {
-      const response = await api.get<Operator[]>(`/users/${id}`);
+      const response = await api.get<Operator>(`/users/${id}`);
       return response.data;
     },
   });
@@ -26,16 +25,10 @@ export function useGetOperatorById(id: number) {
 
 export function useCreateOperator() {
   const queryClient = useQueryClient();
-  const { data: dataSession, status } = useSession();
-  const token = dataSession?.token?.user?.token;
 
   const mutation = useMutation({
     mutationFn: async (data: OperatorCreateInput) => {
-      const response = await api.post("/users", data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await api.post("/users", data);
       return response.data;
     },
     onSuccess: () => {

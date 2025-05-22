@@ -22,6 +22,13 @@ export const verifyToken = async (
   reply: FastifyReply
 ) => {
   try {
+    if (
+      request.headers.referer?.includes(process.env.SERVER_URL as string) &&
+      request.headers.referer.includes("docs")
+    ) {
+      return;
+    }
+
     const authorizationHeader = request.headers.authorization;
     if (!authorizationHeader) {
       return reply.status(401).send({ error: "Token não fornecido" });

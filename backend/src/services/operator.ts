@@ -1,7 +1,8 @@
-import type { Prisma } from "../../prisma/generated/client";
 import prisma from "../db";
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 import bcrypt from "bcrypt";
+import type { CreateOperatorType } from "@/schemas/operator/create";
+import type { UpdateOperatorType } from "@/schemas/operator/update";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class OperatorService {
@@ -23,9 +24,7 @@ export class OperatorService {
     return operator;
   }
 
-  public static async createOperator(
-    data: Prisma.OperatorUncheckedCreateInput
-  ) {
+  public static async createOperator(data: CreateOperatorType) {
     const hashedPassword = await bcrypt.hash(data.password, 10);
     const operator = await prisma.operator.create({
       data: { ...data, password: hashedPassword },
@@ -34,10 +33,7 @@ export class OperatorService {
     return operator;
   }
 
-  public static async updateOperator(
-    id: number,
-    data: Prisma.OperatorUncheckedUpdateInput
-  ) {
+  public static async updateOperator(id: number, data: UpdateOperatorType) {
     let hashedPassword: string | undefined;
     if (data.password) {
       hashedPassword = await bcrypt.hash(data.password as string, 10);

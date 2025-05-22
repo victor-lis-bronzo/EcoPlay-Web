@@ -1,12 +1,12 @@
-model Institutions {
+model Institution {
   institutionId Int      @id @default(autoincrement()) @map("institution_id")
   name          String   @unique
   status        Boolean
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt @map("updated_at")
 
-  controllers   Controller[]
-  operators     Operator[]
-  
-  @@map("institutions")
+  controllers Controller[]
+  operators   Operator[]
+
+  @@map("institution")
 }

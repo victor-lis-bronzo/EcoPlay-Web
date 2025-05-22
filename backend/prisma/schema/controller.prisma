@@ -1,13 +1,13 @@
 model Controller {
-  controllerId  Int      @id @default(autoincrement()) @map("controller_id")
+  code          String   @id @unique
+  controllerId  Int      @default(autoincrement()) @map("controller_id")
   name          String
-  code          String
   status        Boolean
   createdAt     DateTime @default(now()) @map("created_at")
   institutionId Int      @map("institution_id")
 
-  Institutions Institutions @relation(fields: [institutionId], references: [institutionId])
-  bottles_cap  BottleCap[]
+  Institution Institution @relation(fields: [institutionId], references: [institutionId])
+  bottles_cap BottleCap[]
 
   @@map("controller")
 }

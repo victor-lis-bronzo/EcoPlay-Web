@@ -1,13 +1,13 @@
 generator client {
-  provider        = "prisma-client-js"
-  output = "../generated/client"
+  provider = "prisma-client-js"
+  output   = "../generated/client"
 }
 
-generator zod {
-  provider         = "zod-prisma-types"
-  output           = "../generated/zod"
-  useMultipleFlies = true
-}
+// generator zod {
+//   provider         = "zod-prisma-types"
+//   output           = "../generated/zod"
+//   useMultipleFlies = true
+// }
 
 datasource db {
   provider = "postgres"

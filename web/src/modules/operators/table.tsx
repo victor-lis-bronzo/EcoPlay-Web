@@ -1,96 +1,73 @@
 "use client";
 
-import TableHeaderComponent from "@/components/table/tableHeader";
 import {
-	Table,
-	TableBody,
-	TableCaption,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table";
-import { Brush, Trash2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
-import { useDeleteOperator, useGetOperators } from "@/hooks/use-operator";
-import Link from "next/link";
+import { useGetOperators } from "@/hooks/use-operator";
+import OperatorTableRow from "./operatorTableRow";
 
 export default function OperatorsTable() {
-	const { data: operators } = useGetOperators();
+  const { data: operators, isLoading } = useGetOperators();
 
-	const { mutate } = useDeleteOperator();
-
-	return (
-		<Table className="w-full min-w-md rounded-xl shadow-lg overflow-auto bg-foreground">
-			<TableHeader className="border-b-2 border-background">
-				<TableRow>
-					<TableHead className="px-5 py-4 text-left text-base font-semibold text-muted">
-						Operator ID
-					</TableHead>
-					<TableHead className="px-5 py-4 text-left text-base font-semibold text-muted">
-						Name
-					</TableHead>
-					<TableHead className="px-5 py-4 text-left text-base font-semibold text-muted">
-						Username
-					</TableHead>
-					<TableHead className="px-5 py-4 text-left text-base font-semibold text-muted">
-						Status
-					</TableHead>
-					<TableHead className="px-5 py-4 text-left text-base font-semibold text-muted">
-						Type
-					</TableHead>
-					<TableHead className="px-5 py-4 text-left text-base font-semibold text-muted">
-						Actions
-					</TableHead>
-				</TableRow>
-			</TableHeader>
-			<TableBody>
-				{operators?.map((operator) => (
-					<TableRow
-						key={operator.operatorId}
-						className="hover:bg-foreground/70 transition-colors"
-					>
-						<TableCell className="px-5 py-3 text-base text-gray-800">
-							{operator.operatorId}
-						</TableCell>
-						<TableCell className="px-5 py-3 text-base text-gray-800">
-							{operator.name}
-						</TableCell>
-						<TableCell className="px-5 py-3 text-base text-gray-800">
-							{operator.username}
-						</TableCell>
-						<TableCell className="px-5 py-3 text-base">
-							<span
-								className={`inline-block px-2.5 py-1 rounded-full text-sm font-medium ${
-									operator.status
-										? "bg-green-100 text-green-800"
-										: "bg-red-100 text-red-800"
-								}`}
-							>
-								{operator.status ? "Active" : "Inactive"}
-							</span>
-						</TableCell>
-						<TableCell className="px-5 py-3 text-base text-gray-800">
-							{operator.type}
-						</TableCell>
-						<TableCell className="px-5 py-5 text-base flex items-center gap-2">
-							<Link
-								href={`/operators/edit/${operator.operatorId}`}
-								className="text-blue-500 hover:text-blue-700"
-							>
-								<Brush className="w-5 h-5" />
-							</Link>
-							<button
-								type="submit"
-								onClick={() => mutate(operator.operatorId)}
-								className="text-red-500 hover:text-red-700 cursor-pointer"
-							>
-								<Trash2 className="w-5 h-5" />
-							</button>
-						</TableCell>
-					</TableRow>
-				))}
-			</TableBody>
-		</Table>
-	);
+  return (
+    <Table className="w-full min-w-md rounded-xl shadow-lg overflow-auto bg-foreground">
+      <TableHeader className="border-b-2 border-background">
+        <TableRow>
+          <TableHead className="px-5 py-4 text-left text-base font-semibold text-muted">
+            Operator ID
+          </TableHead>
+          <TableHead className="px-5 py-4 text-left text-base font-semibold text-muted">
+            Name
+          </TableHead>
+          <TableHead className="px-5 py-4 text-left text-base font-semibold text-muted">
+            Username
+          </TableHead>
+          <TableHead className="px-5 py-4 text-left text-base font-semibold text-muted">
+            Status
+          </TableHead>
+          <TableHead className="px-5 py-4 text-left text-base font-semibold text-muted">
+            Type
+          </TableHead>
+          <TableHead className="px-5 py-4 text-left text-base font-semibold text-muted">
+            Actions
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {operators && operators?.length !== 0 ? (
+          operators?.map((operator) => (
+            <OperatorTableRow key={operator.operatorId} operator={operator} />
+          ))
+        ) : isLoading ? (
+          <TableRow>
+            <TableCell
+              colSpan={6}
+              className="text-center py-4 flex items-center w-full"
+            >
+              <Loader2 className="w-6 h-6 animate-spin text-muted" />
+            </TableCell>
+          </TableRow>
+        ) : (
+          <TableRow>
+            <TableCell
+              colSpan={6}
+              className="text-center py-4 flex items-center w-full"
+            >
+              <h2 className="text-center text-muted font-semibold">
+                No operators found
+              </h2>
+            </TableCell>
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
+  );
 }

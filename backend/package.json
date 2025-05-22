@@ -11,7 +11,8 @@
     "swagger": "tsx src/swagger.ts",
     "studio": "npx prisma studio",
     "generate": "npx prisma generate",
-    "migrate": "npx prisma migrate dev"
+    "migrate": "npx prisma migrate",
+    "production": "prisma migrate deploy && pnpm build"
   },
   "keywords": [
     "Sustentabilidade",

@@ -1,19 +1,17 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "_version": "20.1.0",
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "node10",
-    "outDir": "./dist",
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "lib": ["es2023"],
+    "module": "node16",
+    "target": "es2022",
     "strict": true,
-    "strictNullChecks": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
+    "moduleResolution": "node16",
+    "baseUrl": ".", // necessário para paths funcionar
     "paths": {
-      "@/*": ["./src/*"],
-      "@prisma/*": ["./prisma/*"]
+      "@/*": ["src/*"]
     }
-  },
-  "include": ["src"]
+  }
 }

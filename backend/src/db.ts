@@ -1,11 +1,11 @@
-import { PrismaClient } from "../prisma/generated/client";
+import { PrismaClient } from "./generated/client";
 
 const prismaClientSingleton = () => {
-	return new PrismaClient();
+  return new PrismaClient();
 };
 
 declare global {
-	var prisma: undefined | ReturnType<typeof prismaClientSingleton>;
+  var prisma: undefined | ReturnType<typeof prismaClientSingleton>;
 }
 
 const prisma = globalThis.prisma ?? prismaClientSingleton();

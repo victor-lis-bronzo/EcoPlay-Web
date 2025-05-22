@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "dev": "tsx watch src/app.ts",
-    "build": "pnpm migrate && pnpm tsup src --format cjs",
+    "build": "pnpm tsup src --format cjs",
     "start": "node dist/app.js",
     "swagger": "tsx src/swagger.ts",
     "studio": "npx prisma studio",

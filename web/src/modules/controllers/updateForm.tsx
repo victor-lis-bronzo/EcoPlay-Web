@@ -22,9 +22,11 @@ const FormSchema = z.object({
 });
 
 export function UpdateControllerForm({
+  institutionId,
   controllerId,
   controller,
 }: {
+  institutionId: number;
   controllerId: number;
   controller: Controller;
 }) {
@@ -50,7 +52,7 @@ export function UpdateControllerForm({
           form.reset({
             name: "",
           });
-          router.push("/controllers");
+          router.push(`/institution/${institutionId}/controller`);
         },
         onError: () => {},
       }

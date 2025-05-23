@@ -4,7 +4,7 @@ import About from "@/modules/app/About";
 import Hero from "@/modules/app/Hero";
 import HowWorks from "@/modules/app/HowWorks";
 import Team from "@/modules/app/Team";
-import BottleCapCounter from "@/modules/app/BottleCapCount";
+import BottleCapCounter from "@/modules/controllers/BottleCapCount";
 
 export default function Home() {
   return (

@@ -15,7 +15,7 @@ export default function InstitutionCard({
 
   return (
     <Link
-      href={`/institution/${institution.institutionId}`}
+      href={`/institution/${institution.institutionId}/controller`}
       key={institution.institutionId}
       className="bg-foreground hover:shadow-lg hover:scale-3d hover:scale-105 duration-150 rounded-xl shadow p-3 flex flex-col gap-1"
     >

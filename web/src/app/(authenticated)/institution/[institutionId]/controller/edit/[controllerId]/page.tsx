@@ -8,6 +8,7 @@ import { useParams, useRouter } from "next/navigation";
 
 export default function EditControllerPage() {
   const params = useParams();
+  const institutionId = Number(params.id);
   const controllerId = Number(params?.controllerId);
 
   const { data: controller } = useGetControllerById(controllerId);
@@ -16,7 +17,7 @@ export default function EditControllerPage() {
     return (
       <div>
         <h2>Operador não encontrado</h2>
-        <Link href="/controllers" className="flex items-center gap-2">
+        <Link href="/institutions" className="flex items-center gap-2">
           <ArrowLeft size={16} />
           Voltar
         </Link>
@@ -26,7 +27,11 @@ export default function EditControllerPage() {
 
   return (
     <div className="py-20">
-      <UpdateControllerForm controllerId={controllerId} controller={controller} />
+      <UpdateControllerForm
+        institutionId={institutionId}
+        controllerId={controllerId}
+        controller={controller}
+      />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetBottleCapsByInstitutionId } from "@/hooks/use-bottle-cap";
+import { useGetCountByInstitutionId } from "@/hooks/use-bottle-cap";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
@@ -9,7 +9,20 @@ export default function BottleCapCounter({
 }: {
   institutionId: number;
 }) {
-  const { data: target } = useGetBottleCapsByInstitutionId(institutionId);
+  const { data: target, refetch } = useGetCountByInstitutionId(institutionId);
+
+  useEffect(() => {
+    if (target) {
+      setCount(0);
+    }
+  }, [target]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [refetch]);
 
   const ref = useRef(null);
   const isInView = useInView(ref);

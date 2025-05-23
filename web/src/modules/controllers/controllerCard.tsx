@@ -3,6 +3,7 @@ import type { Controller } from "@/interfaces/controller";
 import { Brush, Loader, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import SendCountButton from "./sendCount";
 
 export default function ControllerCard({
   controller,
@@ -57,6 +58,7 @@ export default function ControllerCard({
         >
           <Brush className="w-5 h-5" />
         </button> */}
+        <SendCountButton code={controller.code} />
         <button
           disabled={isPending}
           type="button"

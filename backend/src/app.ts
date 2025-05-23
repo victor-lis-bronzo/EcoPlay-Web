@@ -65,8 +65,8 @@ app.register(fastifySwaggerUi, {
   },
 });
 
-app.setValidatorCompiler(validatorCompiler);
-app.setSerializerCompiler(serializerCompiler);
+// app.setValidatorCompiler(validatorCompiler);
+// app.setSerializerCompiler(serializerCompiler);
 app.setErrorHandler(errorHandler);
 
 app.register(login);

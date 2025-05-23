@@ -73,7 +73,7 @@ app.register(login);
 app.register(createUser);
 
 app.register(async (app) => {
-  app.addHook("preHandler", verifyToken);
+  // app.addHook("preHandler", verifyToken);
   app.register(OperatorRoutes, { prefix: "/users" });
   app.register(InstitutionRoutes, { prefix: "/institutions" });
   app.register(ControllerRoutes, { prefix: "/controllers" });

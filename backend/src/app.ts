@@ -72,13 +72,10 @@ app.setErrorHandler(errorHandler);
 app.register(login);
 app.register(createUser);
 
-app.register(async (app) => {
-  // app.addHook("preHandler", verifyToken);
-  app.register(OperatorRoutes, { prefix: "/users" });
-  app.register(InstitutionRoutes, { prefix: "/institutions" });
-  app.register(ControllerRoutes, { prefix: "/controllers" });
-  app.register(BottleCapRoutes, { prefix: "/bottle-caps" });
-});
+app.register(OperatorRoutes, { prefix: "/users" });
+app.register(InstitutionRoutes, { prefix: "/institutions" });
+app.register(ControllerRoutes, { prefix: "/controllers" });
+app.register(BottleCapRoutes, { prefix: "/bottle-caps" });
 
 // Inicializa o servidor
 const port = process.env.PORT ? Number(process.env.PORT) : 4000;

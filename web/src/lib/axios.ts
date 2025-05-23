@@ -17,6 +17,7 @@ api.interceptors.request.use(
     if (cachedSession?.token?.user?.token) {
       config.headers.Authorization = `Bearer ${cachedSession.token.user.token}`;
     }
+    config.headers["Access-Control-Allow-Origin"] = "*";
     return config;
   },
   (error) => Promise.reject(error)

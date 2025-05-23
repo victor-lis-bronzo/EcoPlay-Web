@@ -29,10 +29,21 @@ import fastifySwaggerUi from "@fastify/swagger-ui";
 
 const app = fastify();
 
-app.register(cors, {
-  origin: ["http://localhost:3000", "https://eco-play.vercel.app/"],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // <--- Inclua o DELETE aqui
-});
+// app.register(cors, {
+//   origin: (origin, cb) => {
+//     const allowedOrigins = [
+//       "http://localhost:3000",
+//       "https://eco-play.vercel.app",
+//     ];
+
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       cb(null, true);
+//     } else {
+//       cb(new Error("Not allowed"), false);
+//     }
+//   },
+//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+// });
 
 const theme = new SwaggerTheme();
 const content = theme.getBuffer(SwaggerThemeNameEnum.DARK); // Dark mode for Swagger UI

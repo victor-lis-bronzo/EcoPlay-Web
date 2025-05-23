@@ -1,4 +1,4 @@
-import { FastifyInstance } from "fastify";
+import type { FastifyInstance } from "fastify";
 import { ZodError } from "zod";
 import { ClientError } from "@/errors/client-error";
 import { ResourceNotFoundError } from "@/errors/resource-not-found-error";

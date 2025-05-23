@@ -30,33 +30,16 @@ import fastifySwaggerUi from "@fastify/swagger-ui";
 const app = fastify();
 
 app.register(cors, {
-  origin: (origin, cb) => {
-    const allowedOrigins = [
-      "http://localhost:3000", // Your local Next.js development
-      "https://eco-play.vercel.app", // Your deployed Next.js frontend
-      // Add any other origins if necessary
-    ];
-
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) {
-      return cb(null, true);
-    }
-
-    if (allowedOrigins.includes(origin)) {
-      cb(null, true);
-    } else {
-      // For development, you might want to be more permissive
-      if (process.env.NODE_ENV !== "production") {
-        console.warn(`CORS: Allowing origin in development: ${origin}`);
-        return cb(null, true);
-      }
-      console.error(`CORS: Blocked origin: ${origin}`);
-      cb(new Error("Not allowed by CORS"), false);
-    }
-  },
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"], // Added PATCH
-  allowedHeaders: ["Content-Type", "Authorization"], // Ensure necessary headers are allowed
-  credentials: true, // If you need to send cookies or authorization headers
+  origin: ["http://localhost:3000", "https://eco-play.vercel.app/"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "X-Requested-With",
+    "Accept",
+    "Origin",
+    "Access-Control-Allow-Origin",
+  ],
 });
 
 const theme = new SwaggerTheme();

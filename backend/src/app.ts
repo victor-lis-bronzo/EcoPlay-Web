@@ -13,6 +13,7 @@ import {
 
 import { errorHandler } from "@/middlewares/error-handler";
 
+import "./mqtt/mqtt"; // Mantém o MQTT ativo
 import "./mqtt/client"; // Mantém o MQTT ativo
 
 import { login } from "@/routes/auth/login";
@@ -30,8 +31,8 @@ const app = fastify();
 
 app.register(cors, {
   origin: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // <--- Inclua o DELETE aqui
 });
-
 
 const theme = new SwaggerTheme();
 const content = theme.getBuffer(SwaggerThemeNameEnum.DARK); // Dark mode for Swagger UI

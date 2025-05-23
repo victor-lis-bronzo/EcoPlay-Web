@@ -9,9 +9,10 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "moduleResolution": "node16",
-    "baseUrl": ".", // necessário para paths funcionar
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"],
+      "@prisma/client": ["./prisma/@prisma-client"]
     }
   }
 }

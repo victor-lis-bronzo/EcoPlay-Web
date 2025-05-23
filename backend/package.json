@@ -12,7 +12,7 @@
     "studio": "npx prisma studio",
     "generate": "npx prisma generate",
     "migrate": "npx prisma migrate",
-    "production": "npx prisma migrate deploy && pnpm generate && pnpm build"
+    "production": "npx prisma migrate deploy && npx prisma generate && pnpm build"
   },
   "keywords": [
     "Sustentabilidade",
@@ -28,7 +28,6 @@
     "@fastify/cors": "^11.0.1",
     "@fastify/swagger": "^9.5.1",
     "@fastify/swagger-ui": "^5.2.2",
-    "@prisma/client": "^6.5.0",
     "axios": "^1.8.4",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",

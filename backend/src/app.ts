@@ -30,7 +30,7 @@ import fastifySwaggerUi from "@fastify/swagger-ui";
 const app = fastify();
 
 app.register(cors, {
-  origin: true,
+  origin: ["http://localhost:3000", "https://eco-play.vercel.app/"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // <--- Inclua o DELETE aqui
 });
 

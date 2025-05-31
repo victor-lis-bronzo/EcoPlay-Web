@@ -35,15 +35,29 @@ export async function getAuthToken() {
   return token.value;
 }
 
-
 export async function signIn(credentials: string, password: string) {
   try {
-    const response = await api.post("/auth/sign-in", {
-      credential: credentials,
-      password: password,
-    });
-    return response.data;
-  } catch (err: any) {
-    throw err.response.data;
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/sign-in`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          credential: credentials,
+          password: password,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw errorData;
+    }
+
+    return await response.json();
+  } catch (err) {
+    throw err;
   }
 }

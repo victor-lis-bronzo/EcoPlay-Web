@@ -12,7 +12,6 @@ import Link from "next/link";
 
 export default function NavigationMenu() {
   const { data: user, isLoading } = useCurrentUser();
-  console.log("Current User:", user);
 
   const isAuthenticated = !!user;
 

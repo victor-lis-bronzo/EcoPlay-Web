@@ -1,31 +1,34 @@
-import dotenv from "dotenv";
-dotenv.config();
+import { env } from "@/config/env";
 
 import fastify from "fastify";
 import cors from "@fastify/cors";
+
 import fastifySwagger from "@fastify/swagger";
+
 import { SwaggerTheme, SwaggerThemeNameEnum } from "swagger-themes";
+import fastifySwaggerUi from "@fastify/swagger-ui";
+
 import {
   jsonSchemaTransform,
   serializerCompiler,
   validatorCompiler,
 } from "fastify-type-provider-zod";
 
-import { errorHandler } from "@/middlewares/error-handler";
+import fastifyCookie from "@fastify/cookie";
 
 import "./mqtt/mqtt"; // Mantém o MQTT ativo
 import "./mqtt/client"; // Mantém o MQTT ativo
 
-import { login } from "@/routes/auth/login";
-import { createUser } from "@/routes/auth/createUser";
+import { authRoutes } from "@/routes/auth/index";
 
 import { OperatorRoutes } from "@/routes/users/index";
 import { InstitutionRoutes } from "@/routes/institutions";
-import { ControllerRoutes } from "./routes/controllers";
-import { BottleCapRoutes } from "./routes/bottles-cap";
+import { ControllerRoutes } from "@/routes/controllers";
+import { BottleCapRoutes } from "@/routes/bottles-cap";
 
-import { verifyToken } from "@/middlewares/verify-token";
-import fastifySwaggerUi from "@fastify/swagger-ui";
+import { authenticate } from "@/middlewares/auth";
+import { errorHandler } from "@/errors/error-handler";
+import { SeedService } from "./services/seed";
 
 const app = fastify();
 
@@ -40,6 +43,17 @@ app.register(cors, {
     "Origin",
     "Access-Control-Allow-Origin",
   ],
+});
+
+app.register(fastifyCookie, {
+  secret: env.JWT_SECRET_KEY, // para assinar cookies
+  parseOptions: {
+    path: "/",
+    httpOnly: true,
+    secure: env.NODE_ENV === "production",
+    maxAge: 60 * 60 * 12,
+    domain: env.COOKIE_DOMAIN, // Domínio do cookie, se necessário 
+  },
 });
 
 const theme = new SwaggerTheme();
@@ -65,20 +79,24 @@ app.register(fastifySwaggerUi, {
   },
 });
 
-// app.setValidatorCompiler(validatorCompiler);
-// app.setSerializerCompiler(serializerCompiler);
+app.setValidatorCompiler(validatorCompiler);
+app.setSerializerCompiler(serializerCompiler);
 app.setErrorHandler(errorHandler);
 
-app.register(login);
-app.register(createUser);
+app.register(authRoutes, { prefix: "/auth" });
 
-app.register(OperatorRoutes, { prefix: "/users" });
-app.register(InstitutionRoutes, { prefix: "/institutions" });
-app.register(ControllerRoutes, { prefix: "/controllers" });
-app.register(BottleCapRoutes, { prefix: "/bottle-caps" });
+app.register((app) => {
+  app.addHook("preHandler", authenticate);
+
+  app.register(OperatorRoutes, { prefix: "/users" });
+  app.register(InstitutionRoutes, { prefix: "/institutions" });
+  app.register(ControllerRoutes, { prefix: "/controllers" });
+  app.register(BottleCapRoutes, { prefix: "/bottle-caps" });
+});
 
 // Inicializa o servidor
 const port = process.env.PORT ? Number(process.env.PORT) : 4000;
 app.listen({ port, host: "0.0.0.0" }).then(() => {
+  SeedService.createAdmin();
   console.log(`Server running on port ${port}`);
 });

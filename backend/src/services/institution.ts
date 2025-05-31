@@ -1,4 +1,4 @@
-import prisma from "../db";
+import prisma from "../config/db";
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 import type { CreateInstitutionType } from "@/schemas/institution/create";
 import type { UpdateInstitutionType } from "@/schemas/institution/update";

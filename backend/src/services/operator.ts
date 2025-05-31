@@ -1,4 +1,4 @@
-import prisma from "../db";
+import prisma from "../config/db";
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 import bcrypt from "bcrypt";
 import type { CreateOperatorType } from "@/schemas/operator/create";

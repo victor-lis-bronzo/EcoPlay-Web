@@ -1,4 +1,4 @@
-import prisma from "../db";
+import prisma from "../config/db";
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 import type { CreateControllerType } from "@/schemas/controller/create";
 import type { UpdateControllerType } from "@/schemas/controller/update";

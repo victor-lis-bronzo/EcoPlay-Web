@@ -80,7 +80,11 @@ app.setErrorHandler(errorHandler);
 app.register(authRoutes, { prefix: "/auth" });
 
 app.register((app) => {
-  // app.addHook("preHandler", authenticate);
+  app.addHook("preHandler", authenticate);
+  app.addHook("onRequest", async (request, reply) => {
+    console.log("Origin:", request.headers.origin);
+    console.log("Method:", request.method);
+  });
 
   app.register(OperatorRoutes, { prefix: "/users" });
   app.register(InstitutionRoutes, { prefix: "/institutions" });

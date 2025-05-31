@@ -3,10 +3,7 @@ import { getAuthToken } from "./auth";
 
 export const api = axios.create({
   baseURL: process.env.API_URL || process.env.NEXT_PUBLIC_API_URL,
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-  },
-  withCredentials: true,
+  withCredentials: true, // ✅ Mantenha isso se quiser enviar cookies ou headers de auth
 });
 
 // Adiciona o token Bearer automaticamente em cada requisição, se existir

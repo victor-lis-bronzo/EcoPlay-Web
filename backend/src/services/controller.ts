@@ -1,4 +1,5 @@
 import prisma from "../config/db";
+
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 import type { CreateControllerType } from "@/schemas/controller/create";
 import type { UpdateControllerType } from "@/schemas/controller/update";
@@ -32,9 +33,11 @@ export class ControllerService {
     return controller;
   }
 
-  public static async getControllerById(id: number) {
+  public static async getControllerById(id: string) {
     const controller = await prisma.controller.findUnique({
-      where: { controllerId: id },
+      where: {
+        code: id,
+      },
       include: {
         Institution: true,
       },
@@ -58,9 +61,9 @@ export class ControllerService {
     return controller;
   }
 
-  public static async updateController(id: number, data: UpdateControllerType) {
+  public static async updateController(id: string, data: UpdateControllerType) {
     const controller = await prisma.controller.findUnique({
-      where: { controllerId: id },
+      where: { code: id },
     });
 
     if (!controller) {
@@ -68,7 +71,7 @@ export class ControllerService {
     }
 
     const updatedController = await prisma.controller.update({
-      where: { controllerId: id },
+      where: { code: id },
       data: {
         ...data,
       },
@@ -77,9 +80,9 @@ export class ControllerService {
     return updatedController;
   }
 
-  public static async deleteController(id: number) {
+  public static async deleteController(code: string) {
     const controller = await prisma.controller.findUnique({
-      where: { controllerId: id },
+      where: { code },
     });
 
     if (!controller) {
@@ -87,7 +90,7 @@ export class ControllerService {
     }
 
     const deletedController = await prisma.controller.delete({
-      where: { controllerId: id },
+      where: { code },
     });
 
     return deletedController;

@@ -7,13 +7,13 @@ import { z } from "zod";
 
 export function updateController(app: FastifyTypedInstance) {
   app.withTypeProvider<ZodTypeProvider>().put(
-    "/:id",
+    "/:code",
     {
       schema: {
         summary: "Update a new controller ",
         tags: ["Controller"],
         params: z.object({
-          id: z.coerce.number().int(),
+          code: z.string(),
         }),
         body: UpdateControllerSchema,
         response: {
@@ -24,9 +24,9 @@ export function updateController(app: FastifyTypedInstance) {
       },
     },
     async (request, reply) => {
-      const { id } = request.params;
+      const { code } = request.params;
       const data = request.body;
-      await ControllerService.updateController(id, data);
+      await ControllerService.updateController(code, data);
       reply.status(201).send({
         message: "Controller updated successfully",
       });

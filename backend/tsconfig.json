@@ -1,17 +1,18 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Node 20",
-  "_version": "20.1.0",
+  "exclude": ["node_modules", "dist", "./prisma/*"],
   "compilerOptions": {
-    "lib": ["es2023"],
-    "module": "None",
-    "esModuleInterop": true,
-    "target": "es2023",
+    "module": "es2022",
+    "moduleResolution": "bundler",
+    "target": "es2022",
     "strict": true,
-    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@prisma/*": ["./prisma/*"]
-    }
+      "@prisma-client/*": ["./prisma/*"]
+    },
+    "resolveJsonModule": true
   }
 }

@@ -5,13 +5,13 @@ import { z } from "zod";
 
 export function deleteController(app: FastifyTypedInstance) {
   app.withTypeProvider<ZodTypeProvider>().delete(
-    "/:id",
+    "/:code",
     {
       schema: {
         summary: "Retrieve a controller",
         tags: ["Controller"],
         params: z.object({
-          id: z.coerce.number().int(),
+          code: z.string(),
         }),
         response: {
           204: z.object({
@@ -21,8 +21,8 @@ export function deleteController(app: FastifyTypedInstance) {
       },
     },
     async (request, reply) => {
-      const { id } = request.params;
-      await ControllerService.deleteController(id);
+      const { code } = request.params;
+      await ControllerService.deleteController(code);
       reply.status(200).send({
         message: "Controller deleted successfully",
       });

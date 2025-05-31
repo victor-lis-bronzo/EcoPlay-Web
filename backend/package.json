@@ -16,6 +16,22 @@
     "migrate": "pnpx prisma migrate",
     "studio": "pnpx prisma studio"
   },
+  "tsup": {
+    "entry": [
+      "src/app.ts"
+    ],
+    "format": [
+      "esm"
+    ],
+    "outDir": "dist",
+    "clean": true,
+    "dts": true,
+    "sourcemap": true,
+    "external": [
+      "./prisma/generated/prisma/client"
+    ],
+    "target": "esnext"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

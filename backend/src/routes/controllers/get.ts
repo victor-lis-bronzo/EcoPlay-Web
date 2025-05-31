@@ -7,13 +7,13 @@ import { z } from "zod";
 
 export function getControllerById(app: FastifyTypedInstance) {
   app.withTypeProvider<ZodTypeProvider>().get(
-    "/:id",
+    "/:code",
     {
       schema: {
         summary: "Retrieve a controller",
         tags: ["Controller"],
         params: z.object({
-          id: z.coerce.number().int(),
+          code: z.string(),
         }),
         response: {
           200: ControllerSchema,
@@ -21,8 +21,8 @@ export function getControllerById(app: FastifyTypedInstance) {
       },
     },
     async (request, reply) => {
-      const { id } = request.params;
-      const controller = await ControllerService.getControllerById(id);
+      const { code } = request.params;
+      const controller = await ControllerService.getControllerById(code);
       reply.status(200).send(controller);
     }
   );

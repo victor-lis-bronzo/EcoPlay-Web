@@ -1,6 +1,6 @@
 import type { Institution } from "./institution";
 
-export interface Controller {
+export type Controller = {
   controllerId: number;
   name: string;
   code: string;
@@ -8,9 +8,9 @@ export interface Controller {
   createdAt: Date;
   institutionId: number;
   Institution: Institution;
-}
+};
 
-export interface ControllerCreateInput {
+export type ControllerCreateInput = {
   name: string;
   institutionId: number;
-}
+};

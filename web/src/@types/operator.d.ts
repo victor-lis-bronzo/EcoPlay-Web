@@ -1,4 +1,4 @@
-export interface Operator {
+export type Operator = {
   operatorId: number;
   username: string;
   name: string;
@@ -10,11 +10,11 @@ export interface Operator {
   sessionVersion: Date;
   institutionId?: number;
   // institution?: Institutions;
-}
+};
 
-export interface OperatorCreateInput {
-  username: string; 
+export type OperatorCreateInput = {
+  username: string;
   name: string;
   password: string;
   type: "USER" | "ADMIN" | string; // Ajuste conforme os valores possíveis de UserType
-}
+};

@@ -1,43 +1,40 @@
-import NextAuthSessionProvider from "@/providers/nextAuthSessionProvider";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import NavigationMenu from "@/components/global/menu";
-import TanstackQueryClientWrapper from "@/providers/tanstackQueryClientProvider";
+import NavigationMenu from "@/components/_global/menu";
+import TanstackQueryClientWrapper from "@/providers/tanstack-query-client-provider";
 
 const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-	title: "Eco-Play: Incentivo à Sustentabilidade",
-	description:
-		"Um incentivo à sustentabilidade e reciclagem através da gamificação",
+  title: "Eco-Play: Incentivo à Sustentabilidade",
+  description:
+    "Um incentivo à sustentabilidade e reciclagem através da gamificação",
 };
 
 export default function RootLayout({
-	children,
+  children,
 }: Readonly<{
-	children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-	return (
-		<html lang="pt-BR">
-			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-			>
-				<NextAuthSessionProvider>
-					<TanstackQueryClientWrapper>
-						<NavigationMenu />
-						{children}
-					</TanstackQueryClientWrapper>
-				</NextAuthSessionProvider>
-			</body>
-		</html>
-	);
+  return (
+    <html lang="pt-BR">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <TanstackQueryClientWrapper>
+          <NavigationMenu />
+          {children}
+        </TanstackQueryClientWrapper>
+      </body>
+    </html>
+  );
 }

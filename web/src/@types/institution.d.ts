@@ -1,6 +1,6 @@
 import type { Operator } from "./operator";
 
-export interface Institution {
+export type Institution = {
   institutionId: number;
   name: string;
   status: boolean;
@@ -8,8 +8,8 @@ export interface Institution {
   updatedAt: Date;
   // controllers: Controller[];
   operators: Operator[];
-}
+};
 
-export interface InstitutionCreateInput {
+export type InstitutionCreateInput = {
   name: string;
-}
+};

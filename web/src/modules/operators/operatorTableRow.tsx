@@ -1,6 +1,6 @@
 import { TableCell, TableRow } from "@/components/ui/table";
 import { useDeleteOperator } from "@/hooks/use-operator";
-import type { Operator } from "@/interfaces/operator";
+import type { Operator } from "@/@types/operator";
 import { Brush, Loader2, Trash2 } from "lucide-react";
 import Link from "next/link";
 

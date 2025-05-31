@@ -21,7 +21,7 @@ export default function ControllersPage() {
     );
   }
   return (
-    <div>
+    <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-10">
       <BottleCapCounter institutionId={institutionId} />
       <br />
       <TableHeaderComponent
@@ -29,6 +29,6 @@ export default function ControllersPage() {
         link={`/institution/${institutionId}/controller/new`}
       />
       <ControllersGrid institutionId={institutionId} />
-    </div>
+    </main>
   );
 }

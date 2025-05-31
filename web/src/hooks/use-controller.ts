@@ -1,10 +1,7 @@
 import api from "@/lib/axios";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-import type {
-  Controller,
-  ControllerCreateInput,
-} from "@/interfaces/controller";
+import type { Controller, ControllerCreateInput } from "@/@types/controller";
 
 export function useGetControllers() {
   return useQuery({

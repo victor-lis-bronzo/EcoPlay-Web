@@ -22,7 +22,7 @@ import {
 import { useRouter, useParams } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import type { Institution } from "@/interfaces/institution";
+import type { Institution } from "@/@types/institution";
 
 const FormSchema = z.object({
   name: z.string().min(3),
@@ -68,7 +68,7 @@ export function UpdateInstitutionForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 w-full max-w-sm mx-auto p-8 rounded-xl shadow-lg bg-foreground"
+        className="space-y-6 w-full max-w-md mx-auto p-8 rounded-xl shadow-lg bg-foreground"
       >
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-2xl font-bold text-background">

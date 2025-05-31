@@ -1,7 +1,7 @@
 import api from "@/lib/axios";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-import type { Operator, OperatorCreateInput } from "@/interfaces/operator";
+import type { Operator, OperatorCreateInput } from "@/@types/operator";
 
 export function useGetOperators() {
   return useQuery({

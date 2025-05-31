@@ -1,18 +1,29 @@
 import { useDeleteController } from "@/hooks/use-controller";
-import type { Controller } from "@/interfaces/controller";
-import { Brush, Loader, Trash2 } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import type { Controller } from "@/@types/controller";
+import { Loader, Trash2 } from "lucide-react";
+import { CircleNotch } from "@phosphor-icons/react";
 import SendCountButton from "./sendCount";
+import { useGetCountByControllerCode } from "@/hooks/use-bottle-cap";
+import { useEffect } from "react";
 
 export default function ControllerCard({
   controller,
 }: {
   controller: Controller;
 }) {
-  const router = useRouter();
-
+  const {
+    data: count,
+    refetch,
+    isLoading,
+  } = useGetCountByControllerCode(controller.code);
   const { mutate, isPending } = useDeleteController();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [refetch]);
 
   return (
     <div
@@ -25,13 +36,11 @@ export default function ControllerCard({
           ID: {controller.controllerId}
         </span>
         <span
-          className={`inline-block px-2.5 py-1 rounded-full text-xs font-medium ${
-            controller.status
-              ? "bg-green-100 text-green-800"
-              : "bg-red-100 text-red-800"
-          }`}
+          className={
+            "inline-block px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800"
+          }
         >
-          {controller.status ? "Ativo" : "Inativo"}
+          {isLoading ? <CircleNotch className="size-3 animate-spin" /> : count}
         </span>
       </div>
       <div>

@@ -4,10 +4,22 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function useGetCountByInstitutionId(institutionId: number) {
   return useQuery({
-    queryKey: ["bottle-caps-count", institutionId],
+    queryKey: ["bottle-caps-count-by-institution", institutionId],
     queryFn: async () => {
       const response = await api.get<number>(
         `/bottle-caps/institution-count/${institutionId}`
+      );
+      return response.data;
+    },
+  });
+}
+
+export function useGetCountByControllerCode(code: string) {
+  return useQuery({
+    queryKey: ["bottle-caps-count-by-controller", code],
+    queryFn: async () => {
+      const response = await api.get<number>(
+        `/bottle-caps/controller-count/${code}`
       );
       return response.data;
     },

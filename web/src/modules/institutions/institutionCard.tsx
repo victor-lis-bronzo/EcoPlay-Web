@@ -1,5 +1,5 @@
 import { useDeleteInstitution } from "@/hooks/use-institution";
-import type { Institution } from "@/interfaces/institution";
+import type { Institution } from "@/@types/institution";
 import { Brush, Loader, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

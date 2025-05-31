@@ -49,7 +49,7 @@ export function CreateInstitutionForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 w-full max-w-sm mx-auto p-8 rounded-xl shadow-lg bg-foreground"
+        className="space-y-6 w-full max-w-md mx-auto p-8 rounded-xl shadow-lg bg-foreground"
       >
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-2xl font-bold text-background">

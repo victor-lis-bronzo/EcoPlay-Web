@@ -1,10 +1,7 @@
 import api from "@/lib/axios";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-import type {
-  Institution,
-  InstitutionCreateInput,
-} from "@/interfaces/institution";
+import type { Institution, InstitutionCreateInput } from "@/@types/institution";
 
 export function useGetInstitutions() {
   return useQuery({

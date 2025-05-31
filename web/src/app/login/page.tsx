@@ -1,20 +1,14 @@
-"use client";
-import { LoginForm } from "@/modules/auth/loginForm";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { LoginForm } from "../../modules/auth/loginForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Login",
+};
 
 export default function Login() {
-	const session = useSession();
-	const router = useRouter();
-	useEffect(() => {
-		if (session.data?.token) {
-			router.push("/");
-		}
-	}, [router, session.data?.token]);
-	return (
-		<section className="flex justify-center items-center w-full h-screen">
-			<LoginForm />
-		</section>
-	);
+  return (
+    <section className="flex justify-center items-center w-full h-screen">
+      <LoginForm />
+    </section>
+  );
 }

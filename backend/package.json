@@ -11,6 +11,7 @@
     "seed": "tsx services/seed.ts",
     "dev": "tsx watch src/app.ts",
     "build": "tsup src --format esm",
+    "production": "npm i && npm run build",
     "start": "node dist/app.js",
     "generate": "pnpx prisma generate",
     "migrate": "pnpx prisma migrate",

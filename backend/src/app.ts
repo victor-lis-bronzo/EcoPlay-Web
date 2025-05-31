@@ -32,18 +32,11 @@ import { SeedService } from "./services/seed";
 
 const app = fastify();
 
-app.register(cors, {
-  origin: ["http://localhost:3000", "https://eco-play.vercel.app/"],
+await app.register(cors, {
+  origin: ["http://localhost:3000", "https://eco-play.vercel.app"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "X-Requested-With",
-    "Accept",
-    "Origin",
-    "Access-Control-Allow-Origin",
-  ],
-  credentials: true, // Permite cookies e cabeçalhos de autorização
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
 });
 
 app.register(fastifyCookie, {

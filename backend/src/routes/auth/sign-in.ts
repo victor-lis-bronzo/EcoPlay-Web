@@ -23,8 +23,14 @@ export function signIn(app: FastifyTypedInstance) {
     async (request, reply) => {
       const { credential, password } = request.body;
 
+      console.log("Signing in operator with credential:", credential);
+      console.log("Signing in operator with password:", password);
+
       const operator = await AuthService.verifyUser(credential, password);
       const token = await AuthService.login(operator);
+
+      console.log("Operator signed in successfully:", operator);
+      console.log("Generated token:", token);
 
       reply.setCookie("auth-token", token).send({
         message: "Operator signed in successfully",

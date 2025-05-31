@@ -43,6 +43,7 @@ app.register(cors, {
     "Origin",
     "Access-Control-Allow-Origin",
   ],
+  credentials: true, // Permite cookies e cabeçalhos de autorização
 });
 
 app.register(fastifyCookie, {
@@ -52,7 +53,7 @@ app.register(fastifyCookie, {
     httpOnly: true,
     secure: env.NODE_ENV === "production",
     maxAge: 60 * 60 * 12,
-    domain: env.COOKIE_DOMAIN, // Domínio do cookie, se necessário 
+    domain: env.COOKIE_DOMAIN, // Domínio do cookie, se necessário
   },
 });
 
@@ -86,7 +87,7 @@ app.setErrorHandler(errorHandler);
 app.register(authRoutes, { prefix: "/auth" });
 
 app.register((app) => {
-  app.addHook("preHandler", authenticate);
+  // app.addHook("preHandler", authenticate);
 
   app.register(OperatorRoutes, { prefix: "/users" });
   app.register(InstitutionRoutes, { prefix: "/institutions" });

@@ -30,6 +30,7 @@ export class AuthService {
       sub: data.operatorId,
       username: data.username,
       name: data.name,
+      type: data.type,
     };
 
     return jwt.sign(payload, env.JWT_SECRET_KEY, {

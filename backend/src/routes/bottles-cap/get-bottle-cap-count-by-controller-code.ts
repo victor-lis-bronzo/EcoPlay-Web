@@ -3,15 +3,15 @@ import type { FastifyTypedInstance } from "@/@types/fastify";
 import type { ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from "zod";
 
-export function getBottleCapCountByInstitutionId(app: FastifyTypedInstance) {
+export function getBottleCapCountByControllerCode(app: FastifyTypedInstance) {
   app.withTypeProvider<ZodTypeProvider>().get(
-    "/institution-count/:id",
+    "/controller-count/:code",
     {
       schema: {
         summary: "Retrieve a bottlecaps by bottlecap",
         tags: ["BottleCap"],
         params: z.object({
-          id: z.coerce.number().int(),
+          code: z.string().min(6, "Controller code is required"),
         }),
         response: {
           200: z.number(),
@@ -19,8 +19,10 @@ export function getBottleCapCountByInstitutionId(app: FastifyTypedInstance) {
       },
     },
     async (request, reply) => {
-      const { id } = request.params;
-      const count = await BottleCapService.getBottleCapCountByInstitutionId(id);
+      const { code } = request.params;
+      const count = await BottleCapService.getBottleCapCountByControllerCode(
+        code
+      );
       reply.status(200).send(count);
     }
   );

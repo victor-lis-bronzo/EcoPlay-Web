@@ -7,7 +7,9 @@ export function useLogin() {
   return useMutation({
     mutationFn: async (data: AuthSession) => {
       try {
+        console.log("Logging in with data:", data);
         const response = await api.post("/auth/sign-in", data);
+        console.log("Login response:", response.data);
         return response.data;
       } catch (err: any) {
         throw err.response.data;

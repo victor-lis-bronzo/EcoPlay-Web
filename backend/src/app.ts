@@ -36,7 +36,7 @@ await app.register(cors, {
   origin: ["http://localhost:3000", "https://eco-play.vercel.app"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
+  // credentials: true,
 });
 
 app.register(fastifyCookie, {

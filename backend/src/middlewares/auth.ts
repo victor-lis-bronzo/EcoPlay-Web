@@ -6,7 +6,9 @@ export async function authenticate(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
-  const token = request.cookies["auth-token"];
+  const token = request.headers.authorization?.split(" ")[1];
+
+  console.log("Token recebido:", token);
 
   if (!token) {
     return reply.status(401).send({ error: "Token ausente" });

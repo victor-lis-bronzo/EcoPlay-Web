@@ -81,8 +81,9 @@ app.register(authRoutes, { prefix: "/auth" });
 
 app.register((app) => {
   app.addHook("preHandler", authenticate);
-  app.addHook("onRequest", async (request, reply) => {Add commentMore actions
+  app.addHook("onRequest", async (request, reply) => {
     console.log("Origin:", request.headers.origin);
+    console.log("Headers:", request.headers);
     console.log("Method:", request.method);
   });
 

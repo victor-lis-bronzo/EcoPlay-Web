@@ -15,7 +15,7 @@ export function signIn(app: FastifyTypedInstance) {
         body: AuthSchema,
         response: {
           200: z.object({
-            message: z.string(),
+            token: z.string(),
           }),
         },
       },
@@ -32,9 +32,10 @@ export function signIn(app: FastifyTypedInstance) {
       console.log("Operator signed in successfully:", operator);
       console.log("Generated token:", token);
 
-      reply.setCookie("auth-token", token).send({
-        message: "Operator signed in successfully",
-      });
+      reply.status(200).send({ token });
+      // reply.setCookie("auth-token", token).send({
+      //   message: "Operator signed in successfully",
+      // });
     }
   );
 }

@@ -14,7 +14,7 @@ import {
   validatorCompiler,
 } from "fastify-type-provider-zod";
 
-import fastifyCookie from "@fastify/cookie";
+// import fastifyCookie from "@fastify/cookie";
 
 import "./mqtt/mqtt"; // Mantém o MQTT ativo
 import "./mqtt/client"; // Mantém o MQTT ativo
@@ -39,16 +39,16 @@ await app.register(cors, {
   // credentials: true,
 });
 
-app.register(fastifyCookie, {
-  secret: env.JWT_SECRET_KEY, // para assinar cookies
-  parseOptions: {
-    path: "/",
-    httpOnly: true,
-    secure: env.NODE_ENV === "production",
-    maxAge: 60 * 60 * 12,
-    domain: env.COOKIE_DOMAIN, // Domínio do cookie, se necessário
-  },
-});
+// app.register(fastifyCookie, {
+//   secret: env.JWT_SECRET_KEY, // para assinar cookies
+//   parseOptions: {
+//     path: "/",
+//     httpOnly: true,
+//     secure: env.NODE_ENV === "production",
+//     maxAge: 60 * 60 * 12,
+//     domain: env.COOKIE_DOMAIN, // Domínio do cookie, se necessário
+//   },
+// });
 
 const theme = new SwaggerTheme();
 const content = theme.getBuffer(SwaggerThemeNameEnum.DARK); // Dark mode for Swagger UI
@@ -80,11 +80,7 @@ app.setErrorHandler(errorHandler);
 app.register(authRoutes, { prefix: "/auth" });
 
 app.register((app) => {
-  app.addHook("preHandler", authenticate);
-  app.addHook("onRequest", async (request, reply) => {
-    console.log("Origin:", request.headers.origin);
-    console.log("Method:", request.method);
-  });
+  // app.addHook("preHandler", authenticate);
 
   app.register(OperatorRoutes, { prefix: "/users" });
   app.register(InstitutionRoutes, { prefix: "/institutions" });

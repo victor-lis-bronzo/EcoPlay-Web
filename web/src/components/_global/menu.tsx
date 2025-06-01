@@ -8,16 +8,27 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useCurrentUser } from "@/hooks/use-auth";
 import { Menu, User, Users, Loader, House, Building2 } from "lucide-react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useEffect } from "react";
 
-export default function NavigationMenu() {
-  const { data: user, isLoading } = useCurrentUser();
+function NavigationMenu() {
+  const { data: user, isLoading, refetch } = useCurrentUser();
+
+  // Refetch user data when the component mounts
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   const isAuthenticated = !!user;
 
   return (
     <DropdownMenu>
-      {!isLoading && (
+      {isLoading ? (
+        <div className="fixed bottom-6 right-6 bg-foreground shadow-lg rounded-full p-3 hover:bg-foreground/90 transition-colors flex items-center gap-2 z-50 cursor-pointer">
+          <Loader className="w-6 h-6 text-background animate-spin" />
+        </div>
+      ) : (
         <DropdownMenuTrigger className="fixed bottom-6 right-6 bg-foreground shadow-lg rounded-full p-3 hover:bg-foreground/90 transition-colors flex items-center gap-2 z-50 cursor-pointer">
           <Menu className="w-6 h-6 text-background" />
         </DropdownMenuTrigger>
@@ -60,3 +71,7 @@ export default function NavigationMenu() {
     </DropdownMenu>
   );
 }
+
+export default dynamic(() => Promise.resolve(NavigationMenu), {
+  ssr: false,
+});

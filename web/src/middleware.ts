@@ -23,6 +23,15 @@ export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
 
   if (publicRoutes.includes(pathname)) {
+    const token = req.cookies.get("auth-token")?.value;
+    if (pathname === "/login" && token) {
+      const user = await verifyToken(token);
+      if (user) {
+        return NextResponse.redirect(
+          new URL("/institutions", req.nextUrl.origin)
+        );
+      }
+    }
     return NextResponse.next();
   }
 
@@ -40,7 +49,7 @@ export async function middleware(req: NextRequest) {
     adminRoutes.some((route) => pathname.startsWith(route)) &&
     user.type !== "ADMIN"
   ) {
-    return NextResponse.redirect(new URL("/", req.nextUrl.origin));
+    return NextResponse.redirect(new URL("/institutions", req.nextUrl.origin));
   }
 
   return NextResponse.next();

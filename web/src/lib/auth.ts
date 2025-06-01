@@ -56,7 +56,15 @@ export async function signIn(credentials: string, password: string) {
       throw errorData;
     }
 
-    return await response.json();
+    console.log("Sign-in response:", response);
+    const data = await response.json();
+    console.log("Sign-in data:", data);
+    const cookieStore = await cookies();
+
+    console.log("Setting auth-token cookie with value:", data.token);
+    cookieStore.set("auth-token", data.token);
+
+    return data.token;
   } catch (err) {
     throw err;
   }

@@ -39,14 +39,9 @@ export function LoginForm() {
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     const response = await signIn(data.credential, data.password);
 
-    if (response.error) {
-      setError(response.error);
-      return;
-    }
-
-    if (response.data) {
+    if (response) {
       setError(null);
-      router.push("/");
+      router.push("/institutions");
     }
   };
 

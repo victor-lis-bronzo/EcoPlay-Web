@@ -15,9 +15,21 @@ import { useEffect } from "react";
 function NavigationMenu() {
   const { data: user, isLoading, refetch } = useCurrentUser();
 
-  // Refetch user data when the component mounts
   useEffect(() => {
     refetch();
+    const handleRouteChange = () => {
+      refetch();
+    };
+
+    window.addEventListener("popstate", handleRouteChange);
+    window.addEventListener("pushstate", handleRouteChange);
+    window.addEventListener("replacestate", handleRouteChange);
+
+    return () => {
+      window.removeEventListener("popstate", handleRouteChange);
+      window.removeEventListener("pushstate", handleRouteChange);
+      window.removeEventListener("replacestate", handleRouteChange);
+    };
   }, [refetch]);
 
   const isAuthenticated = !!user;

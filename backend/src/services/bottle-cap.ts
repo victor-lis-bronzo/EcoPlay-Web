@@ -82,4 +82,20 @@ export class BottleCapService {
       }
     });
   }
+
+  public static async resetBottleCapCountByControllerCode(id: string) {
+    const topic = `controller/${id}/count`;
+    const message = `0`;
+    console.log(
+      `Enviando contagem de tampinhas para o tópico ${topic}:`,
+      message
+    );
+    client.publish(topic, message, { qos: 1 }, (error) => {
+      if (error) {
+        console.error("Erro ao publicar mensagem:", error);
+      } else {
+        console.log("Mensagem publicada com sucesso");
+      }
+    });
+  }
 }

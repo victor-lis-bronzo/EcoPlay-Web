@@ -5,6 +5,7 @@ import { CircleNotch } from "@phosphor-icons/react";
 import SendCountButton from "./sendCount";
 import { useGetCountByControllerCode } from "@/hooks/use-bottle-cap";
 import { useEffect } from "react";
+import ResetCountButton from "./resetCount";
 
 export default function ControllerCard({
   controller,
@@ -67,6 +68,7 @@ export default function ControllerCard({
         >
           <Brush className="w-5 h-5" />
         </button> */}
+        <ResetCountButton code={controller.code} />
         <SendCountButton code={controller.code} />
         <button
           disabled={isPending}

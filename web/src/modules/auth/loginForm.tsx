@@ -42,6 +42,7 @@ export function LoginForm() {
     if (response) {
       setError(null);
       router.push("/institutions");
+      router.refresh();
     }
   };
 

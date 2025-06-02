@@ -26,6 +26,26 @@ export function useGetCountByControllerCode(code: string) {
   });
 }
 
+export function useResetCountByControllerCode() {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: async ({ code }: { code: string }) => {
+      const response = await api.post(
+        `/bottle-caps/controller-send-count/${code}?reset=true`
+      );
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["bottle-caps-send-count"],
+      });
+    },
+  });
+
+  return mutation;
+}
+
 export function useSendCountByControllerCode() {
   const queryClient = useQueryClient();
 

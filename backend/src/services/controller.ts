@@ -92,6 +92,10 @@ export class ControllerService {
       throw new ResourceNotFoundError();
     }
 
+    await prisma.bottleCap.deleteMany({
+      where: { controllerCode: code },
+    });
+
     const deletedController = await prisma.controller.delete({
       where: { code },
     });

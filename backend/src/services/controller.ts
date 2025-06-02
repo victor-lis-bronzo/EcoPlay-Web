@@ -33,10 +33,10 @@ export class ControllerService {
     return controller;
   }
 
-  public static async getControllerById(id: string) {
+  public static async getControllerById(code: string) {
     const controller = await prisma.controller.findUnique({
       where: {
-        code: id,
+        code,
       },
       include: {
         Institution: true,
@@ -61,9 +61,12 @@ export class ControllerService {
     return controller;
   }
 
-  public static async updateController(id: string, data: UpdateControllerType) {
+  public static async updateController(
+    code: string,
+    data: UpdateControllerType
+  ) {
     const controller = await prisma.controller.findUnique({
-      where: { code: id },
+      where: { code },
     });
 
     if (!controller) {
@@ -71,7 +74,7 @@ export class ControllerService {
     }
 
     const updatedController = await prisma.controller.update({
-      where: { code: id },
+      where: { code },
       data: {
         ...data,
       },

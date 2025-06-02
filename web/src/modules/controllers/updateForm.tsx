@@ -4,10 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
-import {
-  useGetControllerById,
-  useUpdateController,
-} from "@/hooks/use-controller";
+import { useUpdateController } from "@/hooks/use-controller";
 import InputDefault from "@/components/form/inputDefault";
 import InputPassword from "@/components/form/inputPassword";
 import { Form } from "@/components/ui/form";
@@ -23,11 +20,9 @@ const FormSchema = z.object({
 
 export function UpdateControllerForm({
   institutionId,
-  controllerId,
   controller,
 }: {
   institutionId: number;
-  controllerId: number;
   controller: Controller;
 }) {
   const router = useRouter();
@@ -67,7 +62,7 @@ export function UpdateControllerForm({
       >
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-2xl font-bold text-background">
-            Atualizar Instituição
+            Atualizar Totem
           </h2>
           <Link
             href="/controllers"
@@ -83,7 +78,7 @@ export function UpdateControllerForm({
           label="Nome"
           className="text-background"
           inputClassName="bg-foreground border-background border-2"
-          placeholder="Nome da instituição"
+          placeholder="Nome do totem"
         />
         <div className="flex justify-end">
           <Button

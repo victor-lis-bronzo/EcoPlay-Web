@@ -36,9 +36,9 @@ export default function ControllerGrid({
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {controller.map((controller) => (
-        <ControllerCard key={controller.controllerId} controller={controller} />
+        <ControllerCard key={controller.code} controller={controller} />
       ))}
     </div>
   );

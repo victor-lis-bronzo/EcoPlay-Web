@@ -7,8 +7,7 @@ export async function authenticate(
   reply: FastifyReply
 ) {
   const token = request.headers.authorization?.split(" ")[1];
-
-  console.log("Token recebido:", token);
+  // console.log("Token recebido:", token);
 
   if (!token) {
     return reply.status(401).send({ error: "Token ausente" });

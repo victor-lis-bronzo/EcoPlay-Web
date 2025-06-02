@@ -1,7 +1,6 @@
 import type { Institution } from "./institution";
 
 export type Controller = {
-  controllerId: number;
   name: string;
   code: string;
   status: boolean;

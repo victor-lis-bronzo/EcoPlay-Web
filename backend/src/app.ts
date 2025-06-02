@@ -81,11 +81,11 @@ app.register(authRoutes, { prefix: "/auth" });
 
 app.register((app) => {
   app.addHook("preHandler", authenticate);
-  app.addHook("onRequest", async (request, reply) => {
-    console.log("Origin:", request.headers.origin);
-    console.log("Headers:", request.headers);
-    console.log("Method:", request.method);
-  });
+  // app.addHook("onRequest", async (request, reply) => {
+  // console.log("Origin:", request.headers.origin);
+  // console.log("Headers:", request.headers);
+  // console.log("Method:", request.method);
+  // });
 
   app.register(OperatorRoutes, { prefix: "/users" });
   app.register(InstitutionRoutes, { prefix: "/institutions" });

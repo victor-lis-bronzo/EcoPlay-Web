@@ -1,11 +1,12 @@
 import { useDeleteController } from "@/hooks/use-controller";
 import type { Controller } from "@/@types/controller";
 import { Loader, Trash2 } from "lucide-react";
-import { CircleNotch } from "@phosphor-icons/react";
+import { CircleNotch, Pencil } from "@phosphor-icons/react";
 import SendCountButton from "./sendCount";
 import { useGetCountByControllerCode } from "@/hooks/use-bottle-cap";
 import { useEffect } from "react";
 import ResetCountButton from "./resetCount";
+import Link from "next/link";
 
 export default function ControllerCard({
   controller,
@@ -19,27 +20,22 @@ export default function ControllerCard({
   } = useGetCountByControllerCode(controller.code);
   const { mutate, isPending } = useDeleteController();
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [refetch]);
-
   return (
     <div
       // href={`/controller/${controller.controllerId}`}
-      key={controller.controllerId}
+      key={controller.code}
       className="bg-foreground duration-150 rounded-xl shadow p-3 flex flex-col gap-1"
     >
       <div className="flex justify-between items-center mb-1">
-        <span className="text-xs text-muted">
-          ID: {controller.controllerId}
-        </span>
+        <span className="text-xs text-muted">ID: {controller.code}</span>
         <span
           className={
-            "inline-block px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800"
+            "inline-block px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 cursor-pointer"
           }
+          onClick={(e) => {
+            if (isLoading) return;
+            refetch();
+          }}
         >
           {isLoading ? <CircleNotch className="size-3 animate-spin" /> : count}
         </span>
@@ -70,12 +66,21 @@ export default function ControllerCard({
         </button> */}
         <ResetCountButton code={controller.code} />
         <SendCountButton code={controller.code} />
+        <Link
+          href={`/institution/${controller.Institution?.institutionId}/controller/edit/${controller.code}`}
+          className={
+            "text-blue-500 hover:text-blue-700 flex items-center justify-center"
+          }
+          title="Editar"
+        >
+          <Pencil className="w-5 h-5" />
+        </Link>
         <button
           disabled={isPending}
           type="button"
           onClick={(e) => {
             e.preventDefault();
-            mutate(controller.controllerId);
+            mutate(controller.code);
           }}
           className={`${
             isPending ? "text-gray-500" : "text-red-500 hover:text-red-700"

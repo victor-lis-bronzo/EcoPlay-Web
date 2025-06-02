@@ -43,7 +43,7 @@ export function CreateControllerForm({
           form.reset({
             name: "",
           });
-          router.push(`/institution/${institutionId}`);
+          router.push(`/institution/${institutionId}/controller`);
         },
         onError: () => {},
       }
@@ -57,9 +57,7 @@ export function CreateControllerForm({
         className="space-y-6 w-full max-w-md mx-auto p-8 rounded-xl shadow-lg bg-foreground"
       >
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-2xl font-bold text-background">
-            Criar Instituição
-          </h2>
+          <h2 className="text-2xl font-bold text-background">Criar Totem</h2>
           <Link
             href={`/institution/${institutionId}`}
             className="bg-background hover:bg-muted text-foreground border border-input rounded-md px-4 py-2 flex items-center transition-colors"
@@ -74,7 +72,7 @@ export function CreateControllerForm({
           label="Nome"
           className="text-background"
           inputClassName="bg-foreground border-background border-2"
-          placeholder="Nome da instituição"
+          placeholder="Nome do totem"
         />
         <div className="flex justify-end">
           <Button

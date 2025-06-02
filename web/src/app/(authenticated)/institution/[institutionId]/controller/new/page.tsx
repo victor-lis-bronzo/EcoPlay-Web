@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 
 export default function NewControllerPage() {
   const params = useParams();
-  const institutionId = Number(params.id);
+  const institutionId = Number(params.institutionId);
 
   if (!institutionId) {
     return (

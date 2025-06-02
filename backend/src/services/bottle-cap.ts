@@ -66,9 +66,11 @@ export class BottleCapService {
     }
   }
 
-  public static async sendBottleCapCountByControllerCode(id: string) {
-    const count = await BottleCapService.getBottleCapCountByControllerCode(id);
-    const topic = `controller/${id}/count`;
+  public static async sendBottleCapCountByControllerCode(code: string) {
+    const count = await BottleCapService.getBottleCapCountByControllerCode(
+      code
+    );
+    const topic = `controller/${code}/count`;
     const message = `${count}`;
     console.log(
       `Enviando contagem de tampinhas para o tópico ${topic}:`,
@@ -83,8 +85,8 @@ export class BottleCapService {
     });
   }
 
-  public static async resetBottleCapCountByControllerCode(id: string) {
-    const topic = `controller/${id}/count`;
+  public static async resetBottleCapCountByControllerCode(code: string) {
+    const topic = `controller/${code}/count`;
     const message = `0`;
     console.log(
       `Enviando contagem de tampinhas para o tópico ${topic}:`,

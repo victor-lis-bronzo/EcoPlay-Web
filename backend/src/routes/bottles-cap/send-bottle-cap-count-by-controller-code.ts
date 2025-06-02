@@ -5,13 +5,13 @@ import { z } from "zod";
 
 export function sendBottleCapCountByControllerCode(app: FastifyTypedInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
-    "/controller-send-count/:id",
+    "/controller-send-count/:code",
     {
       schema: {
         summary: "Retrieve a bottlecaps by bottlecap",
         tags: ["BottleCap"],
         params: z.object({
-          id: z.string(),
+          code: z.string(),
         }),
         querystring: z.object({
           reset: z.coerce.boolean().optional().default(false),
@@ -22,15 +22,15 @@ export function sendBottleCapCountByControllerCode(app: FastifyTypedInstance) {
       },
     },
     async (request, reply) => {
-      const { id } = request.params;
+      const { code } = request.params;
       const { reset } = request.query;
       if (reset) {
         // Reset the bottle cap count for the controller
-        await BottleCapService.resetBottleCapCountByControllerCode(id);
+        await BottleCapService.resetBottleCapCountByControllerCode(code);
         reply.status(204).send();
         return;
       }
-      await BottleCapService.sendBottleCapCountByControllerCode(id);
+      await BottleCapService.sendBottleCapCountByControllerCode(code);
       reply.status(200).send();
     }
   );

@@ -25,11 +25,12 @@ export function useGetControllersByInstitutionId(id: number) {
   });
 }
 
-export function useGetControllerById(id: number) {
+export function useGetControllerByCode(code: string) {
   return useQuery({
     queryKey: ["controller"],
     queryFn: async () => {
-      const response = await api.get<Controller>(`/controllers/${id}`);
+      const response = await api.get<Controller>(`/controllers/${code}`);
+      console.log("useGetControllerById response", response.data);
       return response.data;
     },
   });
@@ -57,7 +58,7 @@ export function useUpdateController() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: Controller) => {
-      const response = await api.put(`/controllers/${data.controllerId}`, data);
+      const response = await api.put(`/controllers/${data.code}`, data);
       return response.data;
     },
     onSuccess: (_data, variables) => {
@@ -65,7 +66,7 @@ export function useUpdateController() {
         queryKey: ["controllers"],
       });
       queryClient.invalidateQueries({
-        queryKey: ["controllers", variables.controllerId],
+        queryKey: ["controllers", variables.code],
       });
     },
   });
@@ -74,8 +75,8 @@ export function useUpdateController() {
 export function useDeleteController() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (id: number) => {
-      const response = await api.delete(`/controllers/${id}`);
+    mutationFn: async (code: string) => {
+      const response = await api.delete(`/controllers/${code}`);
       return response.data;
     },
     onSuccess: () => {

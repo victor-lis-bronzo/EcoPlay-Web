@@ -33,7 +33,11 @@ import { SeedService } from "./services/seed";
 const app = fastify();
 
 await app.register(cors, {
-  origin: ["http://localhost:3000", "https://eco-play.vercel.app"],
+  origin: [
+    "http://localhost:3000",
+    "https://cap-dunk.vercel.app",
+    "https://eco-play.vercel.app",
+  ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
@@ -58,8 +62,8 @@ app.register(fastifySwagger, {
     consumes: ["application/json"],
     produces: ["application/json"],
     info: {
-      title: "Eco-Play API",
-      description: "API para a aplicação do Eco-Play",
+      title: "Cap-Dunk API",
+      description: "API para a aplicação do Cap-Dunk",
       version: "1.0.0",
     },
   },

@@ -54,7 +54,7 @@ export function LoginForm() {
       >
         <div className="mb-4 flex flex-col items-center">
           <h1 className="text-5xl md:text-6xl font-extrabold text-muted">
-            Eco-Play
+            Cap-Dunk
           </h1>
           <h2 className="text-xl font-semibold text-background">
             Bem-vindo de volta

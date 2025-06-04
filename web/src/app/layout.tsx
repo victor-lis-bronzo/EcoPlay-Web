@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Eco-Play: Incentivo à Sustentabilidade",
+  title: "Cap-Dunk: Incentivo à Sustentabilidade",
   description:
     "Um incentivo à sustentabilidade e reciclagem através da gamificação",
 };

@@ -1,6 +1,7 @@
 "use client";
 
 import { useGetCountByInstitutionId } from "@/hooks/use-bottle-cap";
+import { useGetInstitutionById } from "../../hooks/use-institution";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Pause, Play } from "@phosphor-icons/react";
@@ -10,6 +11,7 @@ export default function BottleCapCounter({
 }: {
   institutionId: number;
 }) {
+  const { data: institution } = useGetInstitutionById(institutionId);
   const { data: target, refetch } = useGetCountByInstitutionId(institutionId);
   const [seconds, setSeconds] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -21,12 +23,12 @@ export default function BottleCapCounter({
   const controls = useAnimation();
   const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    if (target) {
-      setCount(0);
-      setSeconds(0);
-    }
-  }, [target]);
+  // useEffect(() => {
+  //   if (target) {
+  //     setCount(0);
+  //     setSeconds(0);
+  //   }
+  // }, [target]);
 
   useEffect(() => {
     if (!playing) return;
@@ -59,7 +61,7 @@ export default function BottleCapCounter({
   }, [isInView, controls, target, seconds]);
 
   return (
-    <section className="bg-foreground py-20 px-6 md:px-32 rounded text-center text-background relative">
+    <section className="mt-1 bg-foreground py-20 px-6 md:px-32 rounded text-center text-background relative">
       <motion.div
         ref={ref}
         initial="hidden"
@@ -71,7 +73,7 @@ export default function BottleCapCounter({
         transition={{ duration: 0.6 }}
         className="max-w-lg mx-auto"
       >
-        <h2 className="text-4xl font-bold mb-4">Tampinhas Coletadas</h2>
+        <h2 className="text-4xl font-bold">Tampinhas Coletadas</h2>
         <p className="text-[5rem] font-extrabold tracking-wider">
           {count.toLocaleString("pt-BR")}
         </p>
@@ -79,6 +81,9 @@ export default function BottleCapCounter({
           Esse é o total de tampinhas que conseguimos arrecadar com a ajuda de
           todos. Obrigado!
         </p>
+        <h4 className="text-3xl font-semibold mb-2 absolute top-2 left-4">
+          {institution?.name}
+        </h4>
         <div className="flex items-center gap-2 text-sm mt-4 absolute bottom-2 right-3">
           <button
             onClick={togglePlay}

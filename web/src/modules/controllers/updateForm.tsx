@@ -65,7 +65,7 @@ export function UpdateControllerForm({
             Atualizar Totem
           </h2>
           <Link
-            href="/controllers"
+            href={`/institution/${institutionId}/controller`}
             className="bg-background hover:bg-muted text-foreground border border-input rounded-md px-4 py-2 flex items-center transition-colors"
           >
             <ArrowLeft size={17} className="mr-1 text-foreground" />

@@ -24,6 +24,7 @@ export default function BottleCapCounter({
   useEffect(() => {
     if (target) {
       setCount(0);
+      setSeconds(0);
     }
   }, [target]);
 
@@ -87,7 +88,7 @@ export default function BottleCapCounter({
           >
             {playing ? <Pause size={18} /> : <Play size={18} />}
           </button>
-          <span>Atualizado a cada {seconds} segundos.</span>
+          {playing && <span>Atualizado a cada {seconds} segundos.</span>}
         </div>
       </motion.div>
     </section>

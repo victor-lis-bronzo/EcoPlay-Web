@@ -35,15 +35,19 @@ export function LoginForm() {
   });
 
   const router = useRouter();
-  const [error, setError] = useState<string | null>(null);
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    const response = await signIn(data.credential, data.password);
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    setLoading(true);
+    const response = await signIn(data.credential, data.password);
     if (response) {
       setError(null);
       router.push("/institutions");
       router.refresh();
     }
+    setLoading(false);
   };
 
   return (
@@ -82,8 +86,11 @@ export function LoginForm() {
           />
         </div>
 
-        <Button type="submit" className="w-full mt-4">
-          Entrar
+        <Button
+          type="submit"
+          className="w-full mt-4 hover:opacity-90 hover:scale-90"
+        >
+          {loading ? "Entrando..." : "Entrar"}
         </Button>
         {error && (
           <div className="p-2 border border-red-500 rounded-md w-full text-center text-red-500 text-sm bg-red-50 mt-2">

@@ -21,6 +21,7 @@ export class SeedService {
         username: env.ADMIN_USERNAME,
         password: await bcrypt.hash(env.ADMIN_PASSWORD, 10),
         name: "Admin",
+        type: "ADMIN",
       },
     });
 

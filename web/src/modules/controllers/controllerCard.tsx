@@ -30,7 +30,7 @@ export default function ControllerCard({
         <span className="text-xs text-muted">ID: {controller.code}</span>
         <span
           className={
-            "inline-block px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 cursor-pointer"
+            "inline-block px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 hover:opacity-90 cursor-pointer"
           }
           onClick={(e) => {
             if (isLoading) return;

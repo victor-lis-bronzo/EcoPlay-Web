@@ -22,6 +22,10 @@ export default function ControllersPage() {
   }
   return (
     <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-10">
+      <Link href="/institutions" className="flex items-center gap-2">
+        <ArrowLeft size={16} />
+        Voltar
+      </Link>
       <BottleCapCounter institutionId={institutionId} />
       <br />
       <TableHeaderComponent

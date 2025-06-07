@@ -3,6 +3,7 @@
 import { useGetCountByInstitutionId } from "@/hooks/use-bottle-cap";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { Pause, Play } from "@phosphor-icons/react";
 
 export default function BottleCapCounter({
   institutionId,
@@ -10,6 +11,15 @@ export default function BottleCapCounter({
   institutionId: number;
 }) {
   const { data: target, refetch } = useGetCountByInstitutionId(institutionId);
+  const [seconds, setSeconds] = useState(0);
+  const [playing, setPlaying] = useState(false);
+
+  const togglePlay = () => setPlaying((prev) => !prev);
+
+  const ref = useRef(null);
+  const isInView = useInView(ref);
+  const controls = useAnimation();
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (target) {
@@ -18,19 +28,21 @@ export default function BottleCapCounter({
   }, [target]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    if (!playing) return;
+
+    if (seconds === 0) {
       refetch();
+      setSeconds(5);
+      return;
+    }
+    const interval = setInterval(() => {
+      setSeconds((prev) => prev - 1);
     }, 1000);
     return () => clearInterval(interval);
-  }, [refetch]);
-
-  const ref = useRef(null);
-  const isInView = useInView(ref);
-  const controls = useAnimation();
-  const [count, setCount] = useState(0);
+  }, [seconds, refetch, playing]);
 
   useEffect(() => {
-    if (isInView && typeof target === "number") {
+    if (isInView && typeof target === "number" && seconds === 0) {
       controls.start("visible");
       let start = 0;
       const step = Math.ceil(target / 60);
@@ -43,10 +55,10 @@ export default function BottleCapCounter({
         setCount(start);
       }, 20);
     }
-  }, [isInView, controls, target]);
+  }, [isInView, controls, target, seconds]);
 
   return (
-    <section className="bg-foreground py-20 px-6 md:px-32 rounded text-center text-background">
+    <section className="bg-foreground py-20 px-6 md:px-32 rounded text-center text-background relative">
       <motion.div
         ref={ref}
         initial="hidden"
@@ -66,6 +78,17 @@ export default function BottleCapCounter({
           Esse é o total de tampinhas que conseguimos arrecadar com a ajuda de
           todos. Obrigado!
         </p>
+        <div className="flex items-center gap-2 text-sm mt-4 absolute bottom-2 right-3">
+          <button
+            onClick={togglePlay}
+            className="p-1 rounded hover:bg-background/10 transition-colors cursor-pointer"
+            aria-label={playing ? "Pausar atualização" : "Iniciar atualização"}
+            type="button"
+          >
+            {playing ? <Pause size={18} /> : <Play size={18} />}
+          </button>
+          <span>Atualizado a cada {seconds} segundos.</span>
+        </div>
       </motion.div>
     </section>
   );
